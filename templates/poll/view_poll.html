@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">{{ poll.title }}</h4>
+				<h6 class="card-subtitle mb-2 text-muted">By <a href="">{{ poll.creator.first_name }}</a></h6>
+				<p class="card-text">{{ poll.descr }}</p>
+				<form action="">
+					{% for option in poll.option_set.all %}
+						<div class="custom-control custom-checkbox mb-2">
+							<input type="checkbox" class="custom-control-input" name="options[]" id="customCheck{{ option.id }}">
+							<label class="custom-control-label" for="customCheck{{ option.id }}">{{ option.title }}</label>
+						</div>
+					{% endfor %}
+					<br>
+					<input type="submit" name="" id="" value="Vote" class="btn btn-primary">
+					<!-- <a href="#" class="card-link">Card link</a>
+					<a href="#" class="card-link">Another link</a> -->
+				</form>
+			</div>
+		</div>		
+	</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,52 @@
+*{
+    font-family: 'Raleway', sans-serif;
+    //font-family: 'Zhi Mang Xing', cursive;
+}
+body{
+	background-color: #1abc9c;
+}
+
+.header-area{
+	margin: 40px 0;
+	margin-bottom: 15px;
+	color: #fff;
+}
+
+.header-area h1{
+	font-family: 'Zhi Mang Xing', cursive;
+	font-weight: bold;
+	font-size: 60px;
+}
+
+.content-area{
+	min-height: 600px;
+	margin-bottom: 80px;
+	width: 100%;
+	//background-color: #ecf0f1;
+	//background-color: #fff;
+	color: #212529;
+	border-radius: 0.25rem;
+}
+.my-nav{
+	float: right;
+	margin: 30px 0px;
+}
+.my-nav li{
+	float: left;
+	list-style: none;
+}
+.my-nav li a{
+	color: #fff;
+	display: block;
+	padding: 0px 15px;
+	font-weight: bold;
+	font-size: 16px;
+}
+.my-nav li a:hover{
+}
+
+.footer-area h1{
+	color: #fff;
+	text-align: center;
+	font-family: 'Zhi Mang Xing', cursive;
+}
