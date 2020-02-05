@@ -20,8 +20,13 @@
 						<ul class="my-nav">
 							<li><a href="{% url 'poll.home' %}">Home</a></li>
 							<li><a href="{% url 'poll.new' %}">New</a></li>
+							{% if request.user.is_authenticated %}
+							<li><a href="#">Profile</a></li>
+							<li><a href="{% url 'accounts.logout' %}">Sign out</a></li>
+							{% else %}
 							<li><a href="{% url 'accounts.signup' %}">Sign up</a></li>
 							<li><a href="{% url 'accounts.login' %}">Sign in</a></li>
+							{% endif %}
 						</ul>
 					</div>
 				</div>
@@ -38,5 +43,11 @@
 		</footer>
 
 	</div>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	
+	{% block scripts %}
+	{% endblock scripts %}
 </body>
 </html>

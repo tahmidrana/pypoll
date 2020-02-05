@@ -6,15 +6,30 @@
 		<div class="card">
 			<div class="card-body">
 				<h4 class="card-title">{{ poll.title }}</h4>
+				{% if poll.anonymous_creator %}
+				<h6 class="card-subtitle mb-2 text-muted">By Anonymous</h6>
+				{% else %}
 				<h6 class="card-subtitle mb-2 text-muted">By <a href="">{{ poll.creator.first_name }}</a></h6>
+				{% endif %}
 				<p class="card-text">{{ poll.descr }}</p>
-				<form action="">
-					{% for option in poll.option_set.all %}
-						<div class="custom-control custom-checkbox mb-2">
-							<input type="checkbox" class="custom-control-input" name="options[]" id="customCheck{{ option.id }}">
-							<label class="custom-control-label" for="customCheck{{ option.id }}">{{ option.title }}</label>
-						</div>
-					{% endfor %}
+				<form action="{% url 'poll.submit_response' poll.id %}" method="POST" id="submission_form">
+					{% csrf_token %}
+					{% if poll.response_type == 1 %}
+						{% for option in poll.option_set.all %}
+							<div class="custom-control custom-radio mb-2">
+								<input type="radio" id="customRadio{{ option.id }}" name="options" value="{{ option.id }}" class="custom-control-input options" required />
+								<label class="custom-control-label" for="customRadio{{ option.id }}">{{ option.title }}</label>
+							</div>
+						{% endfor %}
+					{% else %}
+						{% for option in poll.option_set.all %}
+							<div class="custom-control custom-checkbox mb-2">
+								<input type="checkbox" class="custom-control-input options" name="options" value="{{ option.id }}" id="customCheck{{ option.id }}" />
+								<label class="custom-control-label" for="customCheck{{ option.id }}">{{ option.title }}</label>
+							</div>
+						{% endfor %}
+					{% endif %}
+					
 					<br>
 					<input type="submit" name="" id="" value="Vote" class="btn btn-primary">
 					<!-- <a href="#" class="card-link">Card link</a>
@@ -25,3 +40,35 @@
 	</div>
 </div>
 {% endblock content %}
+
+
+{% block scripts %}
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		//
+	});
+
+	$('#submission_form').submit(function(event){
+		event.preventDefault();
+		options = []
+		$.each($("input[name='options']:checked"), function(){
+			options.push($(this).val());
+		});
+		//data = $('#submission_form').serialize()
+		$.ajax({
+			url: '{% url "poll.submit_response" poll.id %}',
+			type: 'POST',
+			dataType: 'json',
+			data: { 
+				options: options,
+				csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+			},
+			success: function(res) {
+				console.log(res.message)
+			}
+		});
+	});
+</script>
+
+{% endblock scripts %}
