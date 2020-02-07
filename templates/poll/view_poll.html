@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+
 <div class="row">
 	<div class="col-md-8 offset-md-2">
 		<div class="card">
@@ -49,7 +51,7 @@
 		//
 	});
 
-	$('#submission_form').submit(function(event){
+	/*$('#submission_form').submit(function(event){
 		event.preventDefault();
 		options = []
 		$.each($("input[name='options']:checked"), function(){
@@ -68,7 +70,7 @@
 				console.log(res.message)
 			}
 		});
-	});
+	});*/
 </script>
 
 {% endblock scripts %}

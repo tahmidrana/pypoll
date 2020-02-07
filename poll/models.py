@@ -34,9 +34,15 @@ class PollSubmission(models.Model):
 	poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
 	ip_addr = models.CharField(max_length=40)
 
-	class Meta:
-		unique_together = ['poll', 'ip_addr']
+	#class Meta:
+		#unique_together = ['poll', 'ip_addr']
+
+	def __str__(self):
+		return self.poll.title
 
 class SubmissionOption(models.Model):
 	submission = models.ForeignKey(PollSubmission, on_delete=models.CASCADE)
 	option = models.ForeignKey(Option, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.submission
