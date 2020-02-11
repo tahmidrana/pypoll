@@ -45,3 +45,7 @@ def submit_response(request, id):
 	else:
 		messages.error(request, 'Bad Request')
 		return redirect('view_poll', id)
+
+def view_result(request, id):
+	poll = get_object_or_404(Poll, pk=id)
+	return render(request, 'poll/view_result.html', {'poll': poll})

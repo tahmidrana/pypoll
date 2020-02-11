@@ -50,3 +50,12 @@ body{
 	text-align: center;
 	font-family: 'Zhi Mang Xing', cursive;
 }
+
+.result-table{
+	margin: 10px;
+}
+.result-table tr{}
+.result-table tr td{
+	padding: 6px 0;
+	padding-right: 25px;
+}

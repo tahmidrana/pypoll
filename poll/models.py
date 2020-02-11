@@ -29,6 +29,17 @@ class Option(models.Model):
 	def __str__(self):
 		return self.title
 
+	def submission_counts(self):
+		return self.submissionoption_set.count()
+
+	def submission_percentage(self):
+		total_submitted_option_count = self.poll.pollsubmission_set.count()
+		this_option_submission_count = self.submissionoption_set.count()
+		this_option_submission_percentage = 0
+		if total_submitted_option_count > 0:
+			this_option_submission_percentage = (this_option_submission_count * 100) / total_submitted_option_count
+		return int(this_option_submission_percentage)
+
 
 class PollSubmission(models.Model):
 	poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
@@ -45,4 +56,4 @@ class SubmissionOption(models.Model):
 	option = models.ForeignKey(Option, on_delete=models.CASCADE)
 
 	def __str__(self):
-		return self.submission
+		return self.submission.poll.title

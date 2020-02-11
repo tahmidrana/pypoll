@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">{{ poll.title }}</h4>
+				{% if poll.anonymous_creator %}
+				<h6 class="card-subtitle mb-2 text-muted">By Anonymous</h6>
+				{% else %}
+				<h6 class="card-subtitle mb-2 text-muted">By <a href="">{{ poll.creator.first_name }}</a></h6>
+				{% endif %}
+				<!-- <p class="card-text">{{ poll.descr }}</p> -->
+				
+				{% for option in poll.option_set.all %}
+					<div class="row m-3">
+						<div class="col">{{ option.title }}</div>
+						<div class="col-8">
+							<div class="progress" style="height: 18px;">
+								<div class="progress-bar" role="progressbar" style="width: {{ option.submission_percentage }}%" aria-valuenow="{{ option.submissionoption_set.count }}" aria-valuemin="0" aria-valuemax="{{ poll.pollsubmission_set.count }}">{{ option.submission_percentage }} %</div>
+							&nbsp{{ option.submission_counts }}
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+
+				<p>Total Response: {{ poll.pollsubmission_set.count }}</p>
+			</div>
+		</div>		
+	</div>
+</div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		//
+	});
+</script>
+
+{% endblock scripts %}
