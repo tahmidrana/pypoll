@@ -1,1 +1,1 @@
-web: gunicorn ohmyfairpoll.wsgi --log-file -
+web: gunicorn pypoll.wsgi --log-file -
