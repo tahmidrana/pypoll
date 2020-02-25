@@ -13,7 +13,7 @@
 		<header class="header-area">
 			<div class="row">
 				<div class="col-md-4">
-					<h1>Oh My Fair Poll</h1>
+					<h1><a href="{% url 'poll.home' %}" class="site-title" style="font-family: 'Zhi Mang Xing', cursive; font-weight: bold;	font-size: 60px; color: #fff; text-decoration: none;">Oh My Fair Poll</a></h1>
 				</div>
 				<div class="col-md-8">
 					<div class="nav-area">
@@ -21,7 +21,7 @@
 							<li><a href="{% url 'poll.home' %}">Home</a></li>
 							<li><a href="{% url 'poll.new' %}">New</a></li>
 							{% if request.user.is_authenticated %}
-							<li><a href="#">Profile</a></li>
+							<li><a href="{% url 'accounts.profile' %}">Profile</a></li>
 							<li><a href="{% url 'accounts.logout' %}">Sign out</a></li>
 							{% else %}
 							<li><a href="{% url 'accounts.signup' %}">Sign up</a></li>
@@ -39,9 +39,9 @@
 			{% endblock content %}
 		</div>
 
-		<footer class="footer-area">
+		<!-- <footer class="footer-area">
 			<h1>Oh My Fair Poll</h1>
-		</footer>
+		</footer> -->
 
 	</div>
 

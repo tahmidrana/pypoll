@@ -28,3 +28,12 @@ def signup_view(request):
 def logout_view(request):
 	logout(request)
 	return redirect('poll.home')
+
+@login_required(login_url='accounts.login')
+def profile(request):
+    user = request.user
+    polls = user.poll_set.all().order_by('-start_date')
+    context = {
+        'polls': polls
+    }
+    return render(request, 'accounts/profile.html', context)

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Poll, Option, PollSubmission, SubmissionOption
 
 def index(request):
-	polls = Poll.objects.all()
+	polls = Poll.objects.all().order_by('-start_date')
 	return render(request, 'poll/index.html', {'polls': polls})
 
 def view_poll(request, id):
@@ -15,6 +15,24 @@ def view_poll(request, id):
 @login_required(login_url='accounts.login')
 def new_poll(request):
 	return render(request, 'poll/new_poll.html')
+
+@login_required(login_url='accounts.login')
+def save_poll(request):
+	if request.method == 'POST':
+		title = request.POST.get('title')
+		response_type = request.POST.get('response_type')
+		creator = request.user
+		anonymous_creator = request.POST.get('anonymous_creator')
+		start_date = request.POST.get('start_date')
+		end_date = request.POST.get('end_date')
+
+		options = request.POST.getlist('options')
+
+		poll = Poll(title=title, response_type=response_type, creator=request.user, anonymous_creator=anonymous_creator, start_date=start_date, end_date=end_date)
+		poll.save()
+
+		return redirect('poll.home')
+		#return render(request, 'poll/new_poll.html')
 
 def submit_response(request, id):
 	if request.method == 'POST':
@@ -33,12 +51,12 @@ def submit_response(request, id):
 		try:
 			poll_submission = PollSubmission(poll = Poll.objects.get(pk=id), ip_addr=ip)
 			poll_submission.save()
-			
+
 			for op in options:
 				so = SubmissionOption(submission = poll_submission, option = get_object_or_404(Option, pk=op))
 				so.save()
 			messages.success(request, 'Thank you, Your response saved successfully.')
-			
+
 		except Exception as e:
 			messages.error(request, 'Sorry, your response save failed.')
 		return redirect('view_poll', id)

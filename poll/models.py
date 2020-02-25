@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class Poll(models.Model):
 	SINGLE_RESPONSE = 1
 	MULTIPLE_RESPONSE = 2
-	
+
 	RESPONSE_CHOICES = [
 		(SINGLE_RESPONSE, 'Single Response'),
 		(MULTIPLE_RESPONSE, 'Multiple Response'),

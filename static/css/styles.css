@@ -12,7 +12,7 @@ body{
 	color: #fff;
 }
 
-.header-area h1{
+.header-area>h1>.site-title{
 	font-family: 'Zhi Mang Xing', cursive;
 	font-weight: bold;
 	font-size: 60px;
@@ -20,7 +20,7 @@ body{
 
 .content-area{
 	min-height: 600px;
-	margin-bottom: 80px;
+	//margin-bottom: 80px;
 	width: 100%;
 	//background-color: #ecf0f1;
 	//background-color: #fff;
