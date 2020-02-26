@@ -11,7 +11,7 @@
 				{% if poll.anonymous_creator %}
 				<h6 class="card-subtitle mb-2 text-muted">By Anonymous</h6>
 				{% else %}
-				<h6 class="card-subtitle mb-2 text-muted">By <a href="">{{ poll.creator.first_name }}</a></h6>
+				<h6 class="card-subtitle mb-2 text-muted">By <a href="#">{{ poll.creator.get_full_name }}</a></h6>
 				{% endif %}
 				<!-- <p class="card-text">{{ poll.descr }}</p> -->
 				<form action="{% url 'poll.submit_response' poll.id %}" method="POST" id="submission_form">
@@ -31,7 +31,7 @@
 							</div>
 						{% endfor %}
 					{% endif %}
-					
+
 					<br>
 					<input type="submit" name="" id="" value="Vote" class="btn btn-primary" />
 					<a href="{% url 'poll.view_result' poll.id %}" class="btn btn-success">Result</a>
@@ -39,7 +39,7 @@
 					<a href="#" class="card-link">Another link</a> -->
 				</form>
 			</div>
-		</div>		
+		</div>
 	</div>
 </div>
 {% endblock content %}
@@ -63,7 +63,7 @@
 			url: '{% url "poll.submit_response" poll.id %}',
 			type: 'POST',
 			dataType: 'json',
-			data: { 
+			data: {
 				options: options,
 				csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
 			},

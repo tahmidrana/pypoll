@@ -20,7 +20,7 @@
 		{% if poll.anonymous_creator %}
 		<small class="text-muted">by Anonymous</small>
 		{% else %}
-		<small class="text-muted">by {{ poll.creator.first_name }}</small>
+		<small class="text-muted">by {{ poll.creator.get_full_name }}</small>
 		{% endif %}
 	</a>
 	{% endfor %}

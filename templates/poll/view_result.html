@@ -11,10 +11,10 @@
 				{% if poll.anonymous_creator %}
 				<h6 class="card-subtitle mb-2 text-muted">By Anonymous</h6>
 				{% else %}
-				<h6 class="card-subtitle mb-2 text-muted">By <a href="">{{ poll.creator.first_name }}</a></h6>
+				<h6 class="card-subtitle mb-2 text-muted">By <a href="">{{ poll.creator.get_full_name }}</a></h6>
 				{% endif %}
 				<!-- <p class="card-text">{{ poll.descr }}</p> -->
-				
+
 				{% for option in poll.option_set.all %}
 					<div class="row m-3">
 						<div class="col">{{ option.title }}</div>
@@ -29,7 +29,7 @@
 
 				<p>Total Response: {{ poll.pollsubmission_set.count }}</p>
 			</div>
-		</div>		
+		</div>
 	</div>
 </div>
 
