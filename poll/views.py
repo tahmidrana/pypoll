@@ -31,6 +31,11 @@ def save_poll(request):
 		poll = Poll(title=title, response_type=response_type, creator=request.user, anonymous_creator=anonymous_creator, start_date=start_date, end_date=end_date)
 		poll.save()
 
+		for op_title in options:
+			if len(op_title):
+				op = Option(title=op_title, poll=poll)
+				op.save()
+
 		return redirect('poll.home')
 		#return render(request, 'poll/new_poll.html')
 
